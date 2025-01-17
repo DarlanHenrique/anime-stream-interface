@@ -14,6 +14,7 @@ export interface Anime {
   pictures?: string[];
   background?: string;
   average_episode_duration?: number;
+  start_date?: string;
 }
 
 export interface MyAnimeListResponse {
@@ -113,7 +114,7 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
     }
 
     case 'anime': {
-      const method = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration`;
+      const method = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration,start_date`;
       try {
         const response = await fetch(`${BASE_URL}${method}`, {
           headers: {
@@ -143,6 +144,7 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
               pictures: data.pictures.map((picture: any) => picture.large),
               background: data.background,
               average_episode_duration: data.average_episode_duration,
+              start_date: data.start_date,
             },
           ],
           type: 'anime',
