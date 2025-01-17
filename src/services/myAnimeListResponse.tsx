@@ -1,52 +1,161 @@
 const BASE_URL = '/api/v2/anime';
 const CLIENT_ID = import.meta.env.VITE_MAL_CLIENT_ID;
-
 export interface Anime {
   id: number;
   name: string;
+  url_image?: string;
+  synopsis?: string;
+  mean?: number;
+  rank?: number;
+  popularity?: number;
+  genres?: string[];
+  num_episodes?: number;
+  rating?: string;
+  pictures?: string[];
+  background?: string;
+  average_episode_duration?: number;
 }
 
 export interface MyAnimeListResponse {
   results: Anime[];
+  type: string;
 }
 
-export const fetchAnimeList = async (query: string = 'one', limit: number = 4): Promise<MyAnimeListResponse> => {
-// https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=4
-// https://api.myanimelist.net/v2/anime?q=one&limit=4
-// https://api.myanimelist.net/v2/anime/30230?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics
-// https://api.myanimelist.net/v2/anime/season/2017/summer?limit=4
+export const fetchAnimeList = async (query: string, limit: number, type: string): Promise<MyAnimeListResponse> => {
+  switch (type) {
+    case 'list': {
+      const method = `?q=${query}&limit=${limit}`;
+      try {
+        const response = await fetch(`${BASE_URL}${method}`, {
+          headers: {
+            'X-MAL-CLIENT-ID': CLIENT_ID,
+          },
+        });
 
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
 
-  const method = `?q=${query}&limit=${limit}`
-  try {
+        const data = await response.json();
 
-    //ANIME LIST COM NOME: ?q=${query}&limit=${limit}`, {
-    //RANKING GERAL: /ranking?${query}=all&&limit=${limit}`, {
-    //RANKING GERAL: /season/{year}/{season}?limit=4`, {
-    const response = await fetch(`${BASE_URL}${method}`, {
-      headers: {
-        'X-MAL-CLIENT-ID': CLIENT_ID,
-      },
-    });
+        const transformedData: MyAnimeListResponse = {
+          results: data.data.map((anime: any) => ({
+            id: anime.node.id,
+            name: anime.node.title,
+          })),
+          type: ""
+        };
 
-    if (!response.ok) {
-      throw new Error(`Erro: ${response.status}`);
+        return transformedData;
+      } catch (error) {
+        console.error('Erro ao buscar animes:', error);
+        throw error;
+      }
+    }
+    case 'season': {
+      const method = `/season/${query}?limit=${limit}`;
+      try {
+        const response = await fetch(`${BASE_URL}${method}`, {
+          headers: {
+            'X-MAL-CLIENT-ID': CLIENT_ID,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const transformedData: MyAnimeListResponse = {
+          results: data.data.map((anime: any) => ({
+            id: anime.node.id,
+            name: anime.node.title,
+          })),
+          type: ""
+        };
+
+        return transformedData;
+      } catch (error) {
+        console.error('Erro ao buscar animes da temporada:', error);
+        throw error;
+      }
     }
 
-    const data = await response.json();
+    case 'ranking': {
+      const method = `/ranking?ranking_type=all&limit=${limit}`;
+      try {
+        const response = await fetch(`${BASE_URL}${method}`, {
+          headers: {
+            'X-MAL-CLIENT-ID': CLIENT_ID,
+          },
+        });
 
-    // Transformando os dados para o formato esperado
-    const transformedData: MyAnimeListResponse = {
-      results: data.data.map((anime: any) => ({
-        id: anime.node.id,
-        name: anime.node.title,
-        url_image: anime.node.main_picture.large,
-      })),
-    };
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
 
-    return transformedData;
-  } catch (error) {
-    console.error('Erro ao buscar animes:', error);
-    throw error;
+        const data = await response.json();
+
+        const transformedData: MyAnimeListResponse = {
+          results: data.data.map((anime: any) => ({
+            id: anime.node.id,
+            name: anime.node.title,
+          })),
+          type: ""
+        };
+
+        return transformedData;
+      } catch (error) {
+        console.error('Erro ao buscar animes no ranking:', error);
+        throw error;
+      }
+    }
+
+    case 'anime': {
+      const method = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration`;
+      try {
+        const response = await fetch(`${BASE_URL}${method}`, {
+          headers: {
+            'X-MAL-CLIENT-ID': CLIENT_ID,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const transformedData: MyAnimeListResponse = {
+          results: [
+            {
+              id: data.id,
+              name: data.title,
+              url_image: data.main_picture.large,
+              synopsis: data.synopsis,
+              mean: data.mean,
+              rank: data.rank,
+              popularity: data.popularity,
+              genres: data.genres.map((genre: any) => genre.name),
+              num_episodes: data.num_episodes,
+              rating: data.rating,
+              pictures: data.pictures.map((picture: any) => picture.large),
+              background: data.background,
+              average_episode_duration: data.average_episode_duration,
+            },
+          ],
+          type: 'anime',
+        };
+
+        return transformedData;
+      } catch (error) {
+        console.error('Erro ao buscar anime:', error);
+        throw error;
+      }
+    }
+
+    default:
+      throw new Error('Tipo de consulta inválido');
   }
 };

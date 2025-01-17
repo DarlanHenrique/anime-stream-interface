@@ -7,8 +7,7 @@ import Production from './Production'
 import NewProduction from './NewProduction'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { fetchAnimeList, Anime } from '../../services/myAnimeListResponse';
-import { useEffect, useState } from 'react';
+import AnimeList from './MyAnimeListComponent'
 
 
 const allGenres: string[] = Array.from(
@@ -32,34 +31,12 @@ const streamServices: string[] = Array.from(
   )
 );
 
-
-
-
 function App() {
-
-  const [animeList, setAnimeList] = useState<Anime[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchAnimeList(); // Busca os animes
-        console.log(response);
-        setAnimeList(response.results); // Armazena no estado
-      } catch (err) {
-        setError('Erro ao carregar os animes');
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-
   return (
     <div>
       <header className='mb-5'>
-      <Navbar types={allTypes} genres={allGenres} streamServices={streamServices} />
-    </header><div className="top-space"></div><main>
+        <Navbar types={allTypes} genres={allGenres} streamServices={streamServices} />
+      </header><div className="top-space"></div><main>
 
         {/* PARA AGRUPAR POR NOVAS PRODUÇÕES */}
         <Category key="new-productions" name="Novas Produções">
@@ -118,7 +95,7 @@ function App() {
               ))}
           </Category>
         ))} */}
-        {/* <AnimeList></AnimeList> */}
+        <AnimeList></AnimeList>
       </main>
       <Footer />
     </div>
