@@ -1,0 +1,75 @@
+.category {
+  .category_name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #444;
+    text-transform: capitalize;
+    scroll-margin-top: 5rem;
+  }
+  .productions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 20px;
+  }
+  .carousel-link {
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  .carousel-link:hover {
+    color: #5740ca;
+  }
+
+  .carousel-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-bottom: 3rem;
+  }
+
+  .carousel-button:hover {
+    background-color: #555;
+  }
+
+  .productions .production {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .productions .production:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.-ms-8 {
+  margin-left: -1.5rem;
+}
+
+.-me-8 {
+  margin-right: -1.5rem;
+}
+
+.new_carrousel_button {
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-sizing: initial !important;    
+    width: 2rem !important;
+}

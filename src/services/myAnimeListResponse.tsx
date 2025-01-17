@@ -16,13 +16,32 @@ export interface Anime {
   average_episode_duration?: number;
   start_date?: string;
 }
+export interface AnimeWithDetails extends Anime {
+  url_image: string;
+  synopsis: string;
+  mean: number;
+  rank: number;
+  popularity: number;
+  genres: string[];
+  num_episodes: number;
+  rating: string;
+  pictures: string[];
+  background: string;
+  average_episode_duration: number;
+  start_date: string;
+  details: Anime | null;
+}
 
 export interface MyAnimeListResponse {
   results: Anime[];
-  type: string;
+  type?: string;
 }
 
-export const fetchAnimeList = async (query: string, limit: number, type: string): Promise<MyAnimeListResponse> => {
+export const fetchAnimeList = async <T extends Anime | AnimeWithDetails>(
+  query: string,
+  limit: number,
+  type: string
+): Promise<{ results: T[] }> => {
   switch (type) {
     case 'list': {
       const method = `?q=${query}&limit=${limit}`;
@@ -39,46 +58,16 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
 
         const data = await response.json();
 
-        const transformedData: MyAnimeListResponse = {
+        const transformedData = {
           results: data.data.map((anime: any) => ({
             id: anime.node.id,
             name: anime.node.title,
-          })),
-          type: ""
+          })) as T[],
         };
 
         return transformedData;
       } catch (error) {
         console.error('Erro ao buscar animes:', error);
-        throw error;
-      }
-    }
-    case 'season': {
-      const method = `/season/${query}?limit=${limit}`;
-      try {
-        const response = await fetch(`${BASE_URL}${method}`, {
-          headers: {
-            'X-MAL-CLIENT-ID': CLIENT_ID,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Erro: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        const transformedData: MyAnimeListResponse = {
-          results: data.data.map((anime: any) => ({
-            id: anime.node.id,
-            name: anime.node.title,
-          })),
-          type: ""
-        };
-
-        return transformedData;
-      } catch (error) {
-        console.error('Erro ao buscar animes da temporada:', error);
         throw error;
       }
     }
@@ -98,12 +87,11 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
 
         const data = await response.json();
 
-        const transformedData: MyAnimeListResponse = {
+        const transformedData = {
           results: data.data.map((anime: any) => ({
             id: anime.node.id,
             name: anime.node.title,
-          })),
-          type: ""
+          })) as T[],
         };
 
         return transformedData;
@@ -128,7 +116,7 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
 
         const data = await response.json();
 
-        const transformedData: MyAnimeListResponse = {
+        const transformedData = {
           results: [
             {
               id: data.id,
@@ -146,8 +134,7 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
               average_episode_duration: data.average_episode_duration,
               start_date: data.start_date,
             },
-          ],
-          type: 'anime',
+          ] as T[],
         };
 
         return transformedData;
@@ -161,3 +148,4 @@ export const fetchAnimeList = async (query: string, limit: number, type: string)
       throw new Error('Tipo de consulta inválido');
   }
 };
+
