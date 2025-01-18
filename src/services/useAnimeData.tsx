@@ -64,32 +64,36 @@ export const useAnimeData = ({ query, limit, type }: UseAnimeDataProps) => {
     const getAnimeDetails = async () => {
       if (animeList.length === 0) return; 
 
-      const details: AnimeWithDetails[] = [];
       setLoadingDetails(true); 
 
-      for (let anime of animeList) {
-        const detail = await fetchAnimeDetails(anime.id);
-        details.push({
-          id: anime.id,
-          name: anime.name,
-          details: detail || null,
-          url_image: '',
-          synopsis: '',
-          mean: 0,
-          rank: 0,
-          popularity: 0,
-          genres: [],
-          num_episodes: 0,
-          rating: '',
-          pictures: [],
-          background: '',
-          average_episode_duration: 0,
-          start_date: '',
-        });
-      }
+      try {
+        const details = await Promise.all(animeList.map(async (anime) => {
+          const detail = await fetchAnimeDetails(anime.id);
+          return {
+            id: anime.id,
+            name: anime.name,
+            details: detail || null,
+            url_image: '',
+            synopsis: '',
+            mean: 0,
+            rank: 0,
+            popularity: 0,
+            genres: [],
+            num_episodes: 0,
+            rating: '',
+            pictures: [],
+            background: '',
+            average_episode_duration: 0,
+            start_date: '',
+          };
+        }));
 
-      setAnimeDetails(details);
-      setLoadingDetails(false); 
+        setAnimeDetails(details);
+      } catch (err) {
+        setError('Erro ao carregar os detalhes dos animes');
+      } finally {
+        setLoadingDetails(false); 
+      }
     };
 
     getAnimeDetails();

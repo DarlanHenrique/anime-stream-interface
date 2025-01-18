@@ -2,52 +2,52 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/App.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Carroussel from '../../components/Carroussel';
-import AnimeProduction from './AnimeProduction';
-import { useAnimeData } from '../../services/useAnimeData';
+import AnimeList from '../../components/AnimeList';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { useAnimeData } from '../../services/useAnimeData';
+
 
 function App() {
-  const { animeDetails, error, loading } = useAnimeData({query: '2024/winter', limit: 4, type: 'season',});
+    const currentDate = new Date();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const season = getSeason();
+    const { loading } = useAnimeData({ query: `${year}/${season}`, limit: 5, type: "season" });
 
-  if (loading) 
-    return <LoadingSpinner />;
+    function getSeason(): string {
+        if (month >= 1 && month <= 3) return 'winter';
+        else if (month >= 4 && month <= 6) return 'spring';
+        else if (month >= 7 && month <= 9) return 'summer';
+        else return 'fall';
+    }
 
-  if (error) 
-    return <div className="text-center text-danger mt-4">{error}</div>;
+    if (loading) return <LoadingSpinner />;
 
-  return (
-    <div>
-      <header className="mb-5">
-        <Navbar />
-      </header>
-      <div className="top-space" />
-      <main>
-        <Carroussel key="new-carroussel">
-          {animeDetails.map((anime) => (
-            <AnimeProduction
-              key={anime.id}
-              id={anime.id}
-              name={anime.name}
-              url_image={anime.details?.url_image || ''}
-              synopsis={anime.details?.synopsis || ''}
-              mean={anime.details?.mean || 0}
-              rank={anime.details?.rank || 0}
-              popularity={anime.details?.popularity || 0}
-              genres={anime.details?.genres || []}
-              num_episodes={anime.details?.num_episodes || 0}
-              rating={anime.details?.rating || ''}
-              pictures={anime.details?.pictures || []}
-              background={anime.details?.background || ''}
-              average_episode_duration={anime.details?.average_episode_duration || 0}
-              start_date={anime.details?.start_date || ''}
-            />
-          ))}
-        </Carroussel>
-      </main>
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <header className="mb-5">
+                <Navbar />
+            </header>
+            <div className="top-space" />
+            <main>
+                {/* AnimeList para a season atual */}
+                <AnimeList
+                    query={`${year}/${season}`}
+                    limit={2}
+                    type="season"
+                    isCarroussel
+                />
+
+                {/* AnimeList para o ranking */}
+                <AnimeList
+                    query="one"
+                    limit={2}
+                    type="list"
+                />
+            </main>
+            <Footer year={year} />
+        </div>
+    );
 }
 
 export default App;
