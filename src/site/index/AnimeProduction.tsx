@@ -53,7 +53,7 @@ export default function AnimeProduction({ id, name, url_image, synopsis, mean, r
         <div key={id} className="new_production -mx-4" style={{ display: "flex", height: "85vh", backgroundColor: "#00050d" }}>
             <div className="new_production_details" style={{ width: "60%" }} >
 
-                <div className="new_name">{name}</div>
+                <div className="new_name"><a href="" className="text-decoration-none text-light">{name}</a></div>
                 <div className="new_details">
                     <div className="new_description text-truncate-2 pe-5">{synopsis}</div>
                 </div>
@@ -73,7 +73,6 @@ export default function AnimeProduction({ id, name, url_image, synopsis, mean, r
                     ))}
                 </div>
             </div>
-
             <div className="new_production_image" style={{ backgroundImage: `url(${url_image})` }}>
                 <div className="indicative-classification">
                     <span className="classification">

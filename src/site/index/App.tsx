@@ -6,27 +6,8 @@ import Carroussel from '../../components/Carroussel';
 import AnimeProduction from './AnimeProduction';
 import { useAnimeData } from '../../services/useAnimeData';
 
-interface AnimeDetail {
-  average_episode_duration: number;
-  background: string;
-  genres: string[];
-  id: number;
-  mean: number;
-  name: string;
-  num_episodes: number;
-  pictures: string[];
-  popularity: number;
-  rank: number;
-  rating: string;
-  start_date: string;
-  synopsis: string;
-  url_image: string;
-}
-
-
-
 function App() {
-  const { animeList, animeDetails, error } = useAnimeData();
+  const { animeDetails, error } = useAnimeData();
 
   return (
     <div>
@@ -37,7 +18,7 @@ function App() {
 
       <main>
         {error && <p>{error}</p>}
-        <Carroussel key="new-carroussel" name="New Animes">
+        <Carroussel key="new-carroussel">
           {animeDetails.map((anime) => (
               <AnimeProduction
                 key={anime.id}
@@ -60,7 +41,6 @@ function App() {
           ))}
         </Carroussel>
       </main>
-
       <Footer />
     </div>
   );
