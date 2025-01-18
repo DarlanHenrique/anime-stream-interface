@@ -61,10 +61,6 @@ export default function AnimeProduction({ id, name, url_image, synopsis, mean, r
                     <button className="btn btn-outline-secondary ">▶️ Play Now</button>
                     <button className="btn btn-outline-secondary rounded-full">🛈</button>
                 </div>
-
-                <div className="new_info">
-                    <div className="mx-2 new_length">{length} episódios</div>
-                </div>
                 <div className="new_genre">
                     {genres.map((genre) => (
                         <span key={genre} className="new_genre-item">

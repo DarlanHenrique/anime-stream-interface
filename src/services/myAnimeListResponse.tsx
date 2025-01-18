@@ -101,6 +101,35 @@ export const fetchAnimeList = async <T extends Anime | AnimeWithDetails>(
       }
     }
 
+    case 'season': {
+      const method = `/season/${query}?limit=${limit}&anime_score&airing`;
+      try {
+        const response = await fetch(`${BASE_URL}${method}`, {
+          headers: {
+            'X-MAL-CLIENT-ID': CLIENT_ID,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const transformedData = {
+          results: data.data.map((anime: any) => ({
+            id: anime.node.id,
+            name: anime.node.title,
+          })) as T[],
+        };
+
+        return transformedData;
+      } catch (error) {
+        console.error('Erro ao buscar animes da temporada:', error);
+        throw error;
+      }
+    }
+
     case 'anime': {
       const method = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration,start_date`;
       try {

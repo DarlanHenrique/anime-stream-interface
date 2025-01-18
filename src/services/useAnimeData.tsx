@@ -1,23 +1,34 @@
 import { useState, useEffect } from 'react';
 import { fetchAnimeList, MyAnimeListResponse, Anime, AnimeWithDetails } from './myAnimeListResponse';
 
-export const useAnimeData = () => {
+interface UseAnimeDataProps {
+  query: string;
+  limit: number;
+  type: string;
+}
+
+export const useAnimeData = ({ query, limit, type }: UseAnimeDataProps) => {
   const [animeList, setAnimeList] = useState<Anime[]>([]);
   const [animeDetails, setAnimeDetails] = useState<AnimeWithDetails[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loadingList, setLoadingList] = useState<boolean>(false); 
+  const [loadingDetails, setLoadingDetails] = useState<boolean>(false); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response: MyAnimeListResponse = await fetchAnimeList('', 2, 'ranking');
+        setLoadingList(true); 
+        const response: MyAnimeListResponse = await fetchAnimeList(query, limit, type);
         setAnimeList(response.results);
       } catch (err) {
         setError('Erro ao carregar os animes');
+      } finally {
+        setLoadingList(false); 
       }
     };
 
     fetchData();
-  }, []);
+  }, [query, limit, type]);
 
   const fetchAnimeDetails = async (id: number) => {
     try {
@@ -51,36 +62,40 @@ export const useAnimeData = () => {
 
   useEffect(() => {
     const getAnimeDetails = async () => {
+      if (animeList.length === 0) return; 
+
       const details: AnimeWithDetails[] = [];
+      setLoadingDetails(true); 
 
       for (let anime of animeList) {
         const detail = await fetchAnimeDetails(anime.id);
         details.push({
-            id: anime.id,
-            name: anime.name,
-            details: detail || null,
-            url_image: '',
-            synopsis: '',
-            mean: 0,
-            rank: 0,
-            popularity: 0,
-            genres: [],
-            num_episodes: 0,
-            rating: '',
-            pictures: [],
-            background: '',
-            average_episode_duration: 0,
-            start_date: ''
+          id: anime.id,
+          name: anime.name,
+          details: detail || null,
+          url_image: '',
+          synopsis: '',
+          mean: 0,
+          rank: 0,
+          popularity: 0,
+          genres: [],
+          num_episodes: 0,
+          rating: '',
+          pictures: [],
+          background: '',
+          average_episode_duration: 0,
+          start_date: '',
         });
       }
 
       setAnimeDetails(details);
+      setLoadingDetails(false); 
     };
 
-    if (animeList.length > 0) {
-      getAnimeDetails();
-    }
+    getAnimeDetails();
   }, [animeList]);
 
-  return { animeList, animeDetails, error };
+  const loading = loadingList || loadingDetails;
+
+  return { animeList, animeDetails, error, loading };
 };
