@@ -45,8 +45,9 @@ function App() {
 
         <AnimeList
           query={`${season == "winter" ? year - 1 : year}/${getSeason(month - 3)}`}
-          limit={5}
+          limit={15}
           type="season"
+          carruselId='LastSeasonCarousel'
         />
         <hr />
         {/* AnimeList recomendada */}
@@ -59,6 +60,7 @@ function App() {
           query=""
           limit={5}
           type="ranking"
+          carruselId='RecommendedCarousel'
         />
       </main>
       <Footer year={year} />

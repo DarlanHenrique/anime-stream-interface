@@ -1,5 +1,4 @@
 import "../css/AnimeCard.css";
-import { CSSProperties } from "react";
 
 interface AnimeCardProps {
     id: number;
@@ -21,10 +20,6 @@ interface AnimeCardProps {
 }
 
 export default function AnimeCard({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, num_list_users, media_type, }: AnimeCardProps) {
-
-    const styles = {
-        "--background-image": `url(${url_image})`
-    } as CSSProperties;
 
     let ratingLabel = getRatingLabel(rating);
 
