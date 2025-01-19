@@ -3,6 +3,8 @@ import { useAnimeData } from '../services/useAnimeData';
 import AnimeProduction from './CarouselPage';
 import Carroussel from './Carousel';
 import AnimeCard from './AnimeCard';
+import LoadingSpinner from './LoadingSpinner';
+
 
 interface AnimeListProps {
     query: string;
@@ -12,11 +14,12 @@ interface AnimeListProps {
 }
 
 const AnimeList: React.FC<AnimeListProps> = ({ query, limit, type, isCarroussel }) => {    
-    const { animeDetails, error } = useAnimeData({ query, limit, type });
+    const { animeDetails, error, loading } = useAnimeData({ query, limit, type });
 
     if (error) return <div className="text-center text-danger mt-4">{error}</div>;
 
     if (isCarroussel) {
+        if (loading) return <LoadingSpinner />;
         return (
             <Carroussel key={`carroussel-${query}`}>
                 {animeDetails.map((anime) => (

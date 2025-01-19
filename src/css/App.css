@@ -14,10 +14,10 @@ body {
 .header {
   display: grid;
   grid-template-areas:
-  "logo title"
-  "logo subtitle";
+    "logo title"
+    "logo subtitle";
   padding-bottom: 0.5rem;
-  
+
 
 
   .logo:hover {
@@ -69,4 +69,26 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.anime-list-title {
+  text-align: left;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.anime-list-title h2 {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.anime-list-title p {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: normal;
+}
+
+.anime-list-title p span {
+  color: #ff6347;
 }

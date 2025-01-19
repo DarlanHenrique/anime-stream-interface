@@ -92,7 +92,7 @@
 .anime_genre {
     .anime_genre_item {
         font-size: 0.7rem;
-        word-wrap: break-word;
+        word-wrap:normal;
         overflow-wrap: anywhere;
     }
 }
