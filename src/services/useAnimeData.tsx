@@ -51,6 +51,8 @@ export const useAnimeData = ({ query, limit, type }: UseAnimeDataProps) => {
           start_date: anime.start_date || '',
           synopsis: anime.synopsis || '',
           url_image: anime.url_image || '',
+          num_list_users: anime.num_list_users || 0,
+          media_type: anime.media_type || '',
         };
       }
       return null;
@@ -85,6 +87,8 @@ export const useAnimeData = ({ query, limit, type }: UseAnimeDataProps) => {
             background: '',
             average_episode_duration: 0,
             start_date: '',
+            num_list_users: 0,
+            media_type: '',
           };
         }));
 

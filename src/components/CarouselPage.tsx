@@ -1,6 +1,6 @@
-import "../../css/AnimeProduction.css";
+import "../css/CarouselPage.css";
 
-interface AnimeProductionProps {
+interface CarouselPageProps {
     id: number;
     name: string;
     url_image: string;
@@ -17,7 +17,7 @@ interface AnimeProductionProps {
     start_date: string;
 }
 
-export default function AnimeProduction({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, }: AnimeProductionProps) {
+export default function CarouselPage({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, }: CarouselPageProps) {
 
     function getRatingLabel(rating: string): string {
         let ratingLabel: string;
@@ -63,7 +63,7 @@ export default function AnimeProduction({ id, name, url_image, synopsis, mean, r
                 </div>
                 <div className="new_genre">
                     {genres.map((genre) => (
-                        <span key={genre} className="new_genre-item">
+                        <span key={genre} className="new_genre_item">
                             <a className="me-1" href={`#${genre}`}>{genre.trim()}</a>
                         </span>
                     ))}

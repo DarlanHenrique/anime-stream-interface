@@ -1,22 +1,22 @@
 
 import React from "react";
-import "../css/Carroussel.css";
+import "../css/Carousel.css";
 
-interface CarrousselProps {
+interface CarouselProps {
     children: React.ReactNode;
 }
 
-export default function Carroussel({ children: animes }: CarrousselProps) {
+export default function Carousel({ children: animes }: CarouselProps) {
     const animeArray = React.Children.toArray(animes);
     return (
         <div className="category mt-5">
-            <div id="NewAnimeCarroussel" className="carousel slide" data-bs-ride="carousel">
+            <div id="NewAnimeCarousel" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     {animeArray.map((_, index) => (
                         <button
                             key={index}
                             type="button"
-                            data-bs-target="#NewAnimeCarroussel"
+                            data-bs-target="#NewAnimeCarousel"
                             data-bs-slide-to={index}
                             className={index === 0 ? "active" : ""}
                             aria-current={index === 0 ? "true" : undefined}
@@ -35,7 +35,7 @@ export default function Carroussel({ children: animes }: CarrousselProps) {
                 <button
                     className="carousel-control-prev -ms-8 new_carrousel_button"
                     type="button"
-                    data-bs-target="#NewAnimeCarroussel"
+                    data-bs-target="#NewAnimeCarousel"
                     data-bs-slide="prev"
                 >
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,7 +44,7 @@ export default function Carroussel({ children: animes }: CarrousselProps) {
                 <button
                     className="carousel-control-next -me-8 new_carrousel_button"
                     type="button"
-                    data-bs-target="#NewAnimeCarroussel"
+                    data-bs-target="#NewAnimeCarousel"
                     data-bs-slide="next"
                 >
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>

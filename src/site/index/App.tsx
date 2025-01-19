@@ -12,7 +12,7 @@ function App() {
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     const season = getSeason();
-    const { loading } = useAnimeData({ query: `${year}/${season}`, limit: 5, type: "season" });
+    // const loading = useAnimeData({ query: `${year}/${season}`, limit: 5, type: "season" });
 
     function getSeason(): string {
         if (month >= 1 && month <= 3) return 'winter';
@@ -21,7 +21,7 @@ function App() {
         else return 'fall';
     }
 
-    if (loading) return <LoadingSpinner />;
+    // if (loading) return <LoadingSpinner />;
 
     return (
         <div>
@@ -40,8 +40,8 @@ function App() {
 
                 {/* AnimeList para o ranking */}
                 <AnimeList
-                    query="one"
-                    limit={2}
+                    query="oda"
+                    limit={5}
                     type="list"
                 />
             </main>

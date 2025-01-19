@@ -16,6 +16,8 @@ export interface Anime {
   background?: string;
   average_episode_duration?: number;
   start_date?: string;
+  num_list_users?: number;
+  media_type?: string;
 }
 
 export interface AnimeWithDetails extends Anime {
@@ -31,6 +33,8 @@ export interface AnimeWithDetails extends Anime {
   background: string;
   average_episode_duration: number;
   start_date: string;
+  num_list_users: number;
+  media_type: string;
   details: Anime | null;
 }
 
@@ -73,6 +77,9 @@ const transformAnimeDetails = (data: any): AnimeWithDetails => ({
   background: data.background,
   average_episode_duration: data.average_episode_duration,
   start_date: data.start_date,
+  num_list_users: data.num_list_users,
+  media_type: data.media_type,
+
   details: null,
 });
 
@@ -91,7 +98,7 @@ export const fetchAnimeList = async <T extends Anime | AnimeWithDetails>(query: 
       endpoint = `/season/${query}?limit=${limit}&anime_score&airing`;
       break;
     case 'anime':
-      endpoint = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration,start_date`;
+      endpoint = `/${query}?fields=id,title,main_picture,synopsis,mean,rank,popularity,genres,num_episodes,rating,pictures,background,average_episode_duration,start_date,num_list_users,media_type`;
       transformFunction = transformAnimeDetails;
       break;
     default:
