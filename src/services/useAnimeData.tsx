@@ -103,6 +103,7 @@ export const useAnimeData = ({ query, limit, type }: UseAnimeDataProps) => {
     getAnimeDetails();
   }, [animeList]);
 
+
   const loading = loadingList || loadingDetails;
 
   return { animeList, animeDetails, error, loading };

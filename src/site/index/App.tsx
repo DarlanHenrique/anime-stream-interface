@@ -10,6 +10,7 @@ function App() {
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
   const season = getSeason(month);
+  const getRandomNum = () => Math.floor(Math.random() * 58514);
 
   function getSeason(month: number): string {
     if (month >= 1 && month <= 3) return 'winter';
@@ -17,8 +18,6 @@ function App() {
     else if (month >= 7 && month <= 9) return 'summer';
     else return 'fall';
   }
-
-  // if (loading) return <LoadingSpinner />;
 
   return (
     <div>
@@ -30,7 +29,7 @@ function App() {
         {/* AnimeList para a season atual */}
         <AnimeList
           query={`${year}/${season}`}
-          limit={2}
+          limit={6}
           type="season"
           isCarroussel
         />
@@ -49,6 +48,15 @@ function App() {
           type="season"
           carruselId='LastSeasonCarousel'
         />
+
+        {/* Call to action de um anime aleatorio */}
+         <AnimeList
+          query={getRandomNum().toString()}
+          limit={0}
+          type="anime"
+          isAnime
+
+        />
         <hr />
         {/* AnimeList recomendada */}
         <div className="anime-list-title mt-1">
@@ -58,7 +66,7 @@ function App() {
 
         <AnimeList
           query=""
-          limit={5}
+          limit={15}
           type="ranking"
           carruselId='RecommendedCarousel'
         />
