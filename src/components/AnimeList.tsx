@@ -5,6 +5,7 @@ import Carroussel from './Carousel';
 import AnimeCard from './AnimeCard';
 import LoadingSpinner from './LoadingSpinner';
 
+
 interface AnimeListProps {
     query: string;
     limit: number;
@@ -64,18 +65,18 @@ const AnimeList: React.FC<AnimeListProps> = ({ query, limit, type, isCarroussel,
                         key={anime.id}
                         id={anime.id}
                         name={anime.name}
-                        url_image={anime.details?.url_image || ''}
-                        synopsis={anime.details?.synopsis || ''}
-                        mean={anime.details?.mean || 0}
-                        rank={anime.details?.rank || 0}
-                        popularity={anime.details?.popularity || 0}
-                        genres={anime.details?.genres || []}
-                        num_episodes={anime.details?.num_episodes || 0}
-                        rating={anime.details?.rating || ''}
-                        pictures={anime.details?.pictures || []}
-                        background={anime.details?.background || ''}
-                        average_episode_duration={anime.details?.average_episode_duration || 0}
-                        start_date={anime.details?.start_date || ''}
+                        url_image={anime.url_image || ''}
+                        synopsis={anime.synopsis || ''}
+                        mean={anime.mean || 0}
+                        rank={anime.rank || 0}
+                        popularity={anime.popularity || 0}
+                        genres={anime.genres || []}
+                        num_episodes={anime.num_episodes || 0}
+                        rating={anime.rating || ''}
+                        pictures={anime.pictures || []}
+                        background={anime.background || ''}
+                        average_episode_duration={anime.average_episode_duration || 0}
+                        start_date={anime.start_date || ''}
                     />))}
             </>
         );

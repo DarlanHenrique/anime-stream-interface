@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/App.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import AnimeList from '../../components/AnimeList';
-import { useState } from 'react';
 
 function App() {
   const currentDate = new Date();
@@ -41,8 +41,7 @@ function App() {
       <main>
         {!isSearchActive ? (
           <>
-            {/* Conteúdo inicial */}
-            <AnimeList
+            {/* <AnimeList
               query={`${year}/${season}`}
               limit={6}
               type="season"
@@ -65,14 +64,14 @@ function App() {
               limit={15}
               type="season"
               carruselId="LastSeasonCarousel"
-            />
+            /> */}
             <AnimeList
               query={getRandomNum().toString()}
               limit={0}
               type="anime"
               isAnime
             />
-            <div className="anime-list-title mt-1">
+            {/* <div className="anime-list-title mt-1">
               <h2>Animes recommended for you</h2>
               <p>We have a selection of the best anime for you to watch</p>
             </div>
@@ -81,11 +80,10 @@ function App() {
               limit={15}
               type="ranking"
               carruselId="RecommendedCarousel"
-            />
+            /> */}
           </>
         ) : (
           <>
-            {/* Resultados da busca */}
             <div className="anime-list-title mt-1">
               <h2>Results for "{searchQuery}"</h2>
               <p>Here are the best results for your search</p>
