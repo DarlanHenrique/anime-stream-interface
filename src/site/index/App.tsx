@@ -41,7 +41,7 @@ function App() {
       <main>
         {!isSearchActive ? (
           <>
-            {/* <AnimeList
+            <AnimeList
               query={`${year}/${season}`}
               limit={6}
               type="season"
@@ -64,14 +64,14 @@ function App() {
               limit={15}
               type="season"
               carruselId="LastSeasonCarousel"
-            /> */}
+            />
             <AnimeList
               query={getRandomNum().toString()}
               limit={0}
               type="anime"
               isAnime
             />
-            {/* <div className="anime-list-title mt-1">
+            <div className="anime-list-title mt-1">
               <h2>Animes recommended for you</h2>
               <p>We have a selection of the best anime for you to watch</p>
             </div>
@@ -80,7 +80,7 @@ function App() {
               limit={15}
               type="ranking"
               carruselId="RecommendedCarousel"
-            /> */}
+            />
           </>
         ) : (
           <>
