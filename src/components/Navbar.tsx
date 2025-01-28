@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import "../css/Navbar.css";
 import logo from '../assets/logo/Net_Prime_Plus_Max_Flix.png';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   onHomeClick: () => void;
@@ -33,14 +34,13 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg fixed-top mt-2 ${
-          isScrolled ? 'navbar-light bg-light' : ''
-        }`}
+        className={`navbar navbar-expand-lg fixed-top mt-2 ${isScrolled ? 'navbar-light bg-light' : ''
+          }`}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             <img className="logo" src={logo} alt="Net Prime Plus Max Flix" />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -55,16 +55,16 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <button
-                  className={`btn me-2 ${
-                    isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
-                  }`}
+                <Link
+                  to="/"
+                  className={`btn me-2 ${isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
+                    }`}
                   onClick={onHomeClick}
                 >
-                  Início
-                </button>
+                  Home
+                </Link>
               </li>
-              <li className="nav-item dropdown">
+              {/* <li className="nav-item dropdown">
                 <a
                   className={`btn ${
                     isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
@@ -76,16 +76,15 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
                 >
                   Categorias
                 </a>
-              </li>
+              </li> */}
             </ul>
             <button
-              className={`btn ${
-                isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
-              }`}
+              className={`btn ${isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
+                }`}
               type="button"
               onClick={() => setShowSearchModal(true)}
             >
-              🔎 Pesquisar
+              🔎 Search
             </button>
           </div>
         </div>
@@ -98,9 +97,14 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
             <input
               className="search-input"
               type="text"
-              placeholder="Busque seu anime favorito..."
+              placeholder="Search your favoirite anime..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               autoFocus
             />
             <button className="search-btn" onClick={handleSearch}>

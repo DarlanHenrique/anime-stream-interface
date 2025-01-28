@@ -1,3 +1,6 @@
+
+import { Link } from "react-router-dom";
+import { getRatingLabel } from "../utils/utils";
 import "../css/CarouselPage.css";
 
 interface CarouselPageProps {
@@ -18,48 +21,21 @@ interface CarouselPageProps {
 }
 
 export default function CarouselPage({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, }: CarouselPageProps) {
-
-    function getRatingLabel(rating: string): string {
-        let ratingLabel: string;
-        switch (rating) {
-            case "g":
-                ratingLabel = "free";
-                break;
-            case "pg":
-                ratingLabel = "ten_years";
-                break;
-            case "pg_13":
-                ratingLabel = "twelve_years";
-                break;
-            case "r":
-                ratingLabel = "fourteen_years";
-                break;
-            case "r+":
-                ratingLabel = "sixteen_years";
-                break;
-            case "rx":
-                ratingLabel = "eighteen_years";
-                break;
-            default:
-                ratingLabel = "free";
-                break;
-        }
-        return ratingLabel;
-    }
-
     let ratingLabel = getRatingLabel(rating);
 
     return (
         <div key={id} className="new_production -mx-4" style={{ display: "flex", height: "85vh", backgroundColor: "#00050d" }}>
             <div className="new_production_details" style={{ width: "60%" }} >
 
-                <div className="new_name"><a href="" className="text-decoration-none text-light">{name}</a></div>
+                <div className="new_name">
+                    <Link to={`/anime/${id}/${name}`} className="text-decoration-none text-light">{name}</Link>
+                </div>
                 <div className="new_details">
                     <div className="new_description text-truncate-2 pe-5">{synopsis}</div>
                 </div>
                 <div className="new_buttons">
-                    <button className="btn btn-outline-secondary ">▶️ Play Now</button>
-                    <button className="btn btn-outline-secondary rounded-full">🛈</button>
+                    <Link to={`/anime/${id}/${name}/1`} className="btn btn-outline-secondary ">▶️ Play Now</Link>
+                    <Link to={`/anime/${id}/${name}`} className="btn btn-outline-secondary rounded-full">🛈</Link>
                 </div>
                 <div className="new_genre">
                     {genres.map((genre) => (
@@ -69,13 +45,13 @@ export default function CarouselPage({ id, name, url_image, synopsis, mean, rank
                     ))}
                 </div>
             </div>
-            <div className="new_production_image" style={{ backgroundImage: `url(${url_image})` }}>
+            <Link to={`/anime/${id}/${name}`} className="new_production_image" style={{ backgroundImage: `url(${url_image})` }}>
                 <div className="indicative-classification">
                     <span className="classification">
                         <img className="new_image_indicative" src={`./img/indicative/${ratingLabel}.png`} alt={name} />
                     </span>
                 </div>
-            </div>
+            </Link>
         </div>
     );
 }

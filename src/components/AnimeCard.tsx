@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { getRatingLabel, formatNumber } from "../utils/utils";
 import "../css/AnimeCard.css";
 
 interface AnimeCardProps {
@@ -23,43 +25,6 @@ export default function AnimeCard({ id, name, url_image, synopsis, mean, rank, p
 
     let ratingLabel = getRatingLabel(rating);
 
-    function getRatingLabel(rating: string): string {
-        let ratingLabel: string;
-        switch (rating) {
-            case "g":
-                ratingLabel = "free";
-                break;
-            case "pg":
-                ratingLabel = "ten_years";
-                break;
-            case "pg_13":
-                ratingLabel = "twelve_years";
-                break;
-            case "r":
-                ratingLabel = "fourteen_years";
-                break;
-            case "r+":
-                ratingLabel = "sixteen_years";
-                break;
-            case "rx":
-                ratingLabel = "eighteen_years";
-                break;
-            default:
-                ratingLabel = "free";
-                break;
-        }
-        return ratingLabel;
-    }
-
-    function formatNumber(num: number): string {
-        if (num >= 1_000_000) {
-            return `${(num / 1_000_000).toFixed(1).replace('.0', '')}M`;
-        } else if (num >= 1_000) {
-            return `${(num / 1_000).toFixed(1).replace('.0', '')}k`;
-        }
-        return num.toString();
-    }
-
     return (
         <div key={id} className="anime_production position-relative">
             <div className="anime_production_image_wrapper">
@@ -68,7 +33,7 @@ export default function AnimeCard({ id, name, url_image, synopsis, mean, rank, p
                     <span className="anime_production_name text-center">{name}</span>
                 </div>
             </div>
-            <a href="" className="anime_production_details text-decoration-none text-white text-start">
+            <Link to={`/anime/${id}/${name}`} className="anime_production_details text-decoration-none text-white text-start">
                 <span className="anime_production_name text-justify mb-1">{name}</span>
                 <div className="row">
                     <span className="classification col-3 d-flex justify-content-center">
@@ -84,8 +49,8 @@ export default function AnimeCard({ id, name, url_image, synopsis, mean, rank, p
                         <span key={genre} className="anime_genre_item me-1"><u>{genre.trim()}</u></span>
                     ))}
                 </div>
-                <a href="" className="text-decoration-none position-absolute bottom-0 start-0" title="Watch the 1st episode.">▶️</a>
-            </a>
+                <Link to={`/anime/${id}/${name}/1`} className="text-decoration-none position-absolute bottom-0 start-0" title="Watch the 1st episode.">▶️</Link>
+            </Link>
         </div>
 
     );

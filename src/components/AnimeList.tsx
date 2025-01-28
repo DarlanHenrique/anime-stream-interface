@@ -5,7 +5,6 @@ import Carroussel from './Carousel';
 import AnimeCard from './AnimeCard';
 import LoadingSpinner from './LoadingSpinner';
 
-
 interface AnimeListProps {
     query: string;
     limit: number;

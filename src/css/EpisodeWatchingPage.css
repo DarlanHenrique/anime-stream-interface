@@ -1,0 +1,124 @@
+.episode-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background-color: #181818;
+
+  .video-section {
+    position: relative;
+    margin-bottom: 20px;
+
+    .container-episode {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+
+      .episode-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 900px;
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+
+        .nav-button {
+          display: flex;
+          align-items: center;
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-decoration: none;
+          color: #333;
+          transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+          color: #000;
+        }
+        .episode-label {
+          font-size: 1rem;
+          font-weight: bold;
+          color: #555;
+
+          .custom-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            position: relative;
+          }
+          .custom-icon span {
+            display: block;
+            background-color: #555;
+            height: 2px;
+            width: 100%;
+            border-radius: 2px;
+            margin: 3px 0;
+          }
+        }
+      }
+    }
+  }
+
+  .anime-details {
+    margin: 20px 0;
+
+    .anime-title {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+
+      .anime-link {
+        text-decoration: none;
+        color: #ff4500;
+      }
+      .anime-link:hover {
+        text-decoration: underline;
+      }
+      .rating-info {
+        font-size: 0.9em;
+        color: #bbb;
+      }
+    }
+    .details-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      .episode-number {
+        font-size: 1.4rem;
+        color: #bbb;
+      }
+      .rating-icon {
+        width: 2rem;
+        height: auto;
+      }
+    }
+    .anime-synopsis {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+
+
+    }
+  }
+
+  .comments-section {
+    margin-top: 40px;
+  }
+
+  .error-message {
+    text-align: center;
+    color: #ff4500;
+    font-size: 1.2em;
+  }
+
+  .navbar-toggler-icon {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+  }
+}
