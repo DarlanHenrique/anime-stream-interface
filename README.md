@@ -10,8 +10,6 @@ React
 
 TypeScript
 
-Vite
-
 CSS Modules / Styled Components
 
 Axios (ou Fetch API para requisições HTTP)
@@ -29,10 +27,6 @@ Permite pesquisar animes pelo nome.
 Detalhes do Anime:
 
 Página dedicada para exibir informações detalhadas de um anime selecionado (sinopse, pontuação, gêneros, entre outros).
-
-Filtro por Gênero:
-
-Permite filtrar os animes por gêneros específicos.
 
 Instalação
 
@@ -56,31 +50,7 @@ npm run dev
 
 Acesse no navegador:
 
-O projeto estará disponível em http://localhost:3000.
-
-Estrutura de Pastas
-
-src/
-├── components/   # Componentes reutilizáveis
-├── pages/        # Páginas principais (Home, Details, etc.)
-├── services/     # Configuração de chamadas à API
-├── styles/       # Estilos globais ou temas
-├── utils/        # Funções auxiliares
-└── App.tsx       # Componente raiz
-
-Contribuição
-
-Contribuições são bem-vindas! Siga as etapas abaixo:
-
-Crie um fork do projeto.
-
-Crie uma branch para sua funcionalidade: git checkout -b minha-funcionalidade.
-
-Faça um commit: git commit -m 'Adiciona nova funcionalidade'.
-
-Envie para o repositório remoto: git push origin minha-funcionalidade.
-
-Abra um Pull Request.
+O projeto estará disponível em http://localhost:5173/anime-stream-interface/.
 
 Documento de Requisitos
 
@@ -107,10 +77,6 @@ Gêneros
 Pontuação
 
 Número de episódios
-
-RF04 - Filtro por Gêneros
-
-O sistema deve permitir filtrar os animes por gênero.
 
 Requisitos Não Funcionais
 
