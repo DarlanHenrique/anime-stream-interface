@@ -181,7 +181,6 @@ button:hover {
   top: 93%;
   left: 92%;
   transform: translate(-50%, -50%);
-  border-radius: 0.5rem;
   max-width: 10%;
   height: auto;
 }

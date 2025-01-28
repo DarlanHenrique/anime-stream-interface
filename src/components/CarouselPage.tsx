@@ -40,7 +40,7 @@ export default function CarouselPage({ id, name, url_image, synopsis, mean, rank
                 <div className="new_genre">
                     {genres.map((genre) => (
                         <span key={genre} className="new_genre_item">
-                            <a className="me-1" href={`#${genre}`}>{genre.trim()}</a>
+                            <a className="me-1">{genre.trim()}</a>
                         </span>
                     ))}
                 </div>
