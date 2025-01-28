@@ -6,7 +6,7 @@ import { formatNumber, getRatingLabel, getStarRating } from "../../utils/utils";
 import "../../css/AnimeDetailsPage.css";
 import "../../css/EpisodeWatchingPage.css";
 
-function AnimeDetailsPage() {
+export default function AnimeDetailsPage() {
 
     const { id } = useParams<{ id: string }>();
     const { animeDetails, error, loading } = useAnimeData({ query: id || '', limit: 0, type: "anime" });
@@ -75,6 +75,7 @@ function AnimeDetailsPage() {
                     <div className="mt-3 text-center">
                         <Link
                             to={`/anime/${id}/${anime.name}/1`}
+                            key={`${anime.name}_first_episode`}
                             className="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -137,7 +138,7 @@ function AnimeDetailsPage() {
                     <h2>Episodes</h2>
                     <div className="episodes-grid">
                         {Array.from({ length: anime.num_episodes || 0 }).map((_, index) => (
-                            <Link to={`/anime/${id}/${anime.name}/${index + 1}`} key={index} className="episode-card">
+                            <Link to={`/anime/${id}/${anime.name}/${index + 1}`} key={`${anime.name}_${index+1}`} className="episode-card">
                                 <div className="episode-image-wrapper">
                                     <img
                                         src={anime.pictures?.[0] || anime.url_image}
@@ -159,7 +160,7 @@ function AnimeDetailsPage() {
                     <div className="anime-list-container carousel" id={`AnimeCarousselPicture_${anime.id}`} data-bs-ride="carousel">
                         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 carousel-inner">
                             {visiblePictires?.map((pic, index) => (
-                                <div className="col">
+                                <div className="col" key={`${pic}_${index}`}>
                                     <img key={pic} src={pic} alt={`Gallery ${index}`} className="gallery-image" />
                                 </div>
                             ))}
@@ -197,5 +198,3 @@ function AnimeDetailsPage() {
         </div >
     );
 }
-
-export default AnimeDetailsPage;

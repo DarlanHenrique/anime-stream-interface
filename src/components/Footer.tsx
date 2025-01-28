@@ -15,10 +15,7 @@ export default function Footer({year}: FooterProps) {
                     </div>
                     <div className="col-12 font-medium text-center">
                         <ul className="list-unstyled d-flex justify-content-center fs-6">
-                            <li className="me-3"><a href="#">Termos de uso</a></li>
-                            <li className="me-3"><a href="#">Política de privacidade</a></li>
-                            <li className="me-3"><a href="#">Contato</a></li>
-                            <li className="text-white">© {year} Disney Statz. Todos os direitos reservados.</li>
+                            <li className="text-white">© {year} Disney Statz. All Rights Reserved.</li>
                         </ul>
                     </div>
                 </div>

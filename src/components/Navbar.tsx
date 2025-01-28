@@ -64,19 +64,6 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
                   Home
                 </Link>
               </li>
-              {/* <li className="nav-item dropdown">
-                <a
-                  className={`btn ${
-                    isScrolled ? 'btn-outline-dark' : 'btn-outline-light'
-                  }`}
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categorias
-                </a>
-              </li> */}
             </ul>
             <button
               className={`btn ${isScrolled ? 'btn-outline-dark' : 'btn-outline-light'

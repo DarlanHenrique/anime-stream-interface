@@ -20,7 +20,7 @@ interface CarouselPageProps {
     start_date: string;
 }
 
-export default function CarouselPage({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, }: CarouselPageProps) {
+export default function CarouselPage({ id, name, url_image, synopsis, genres, rating, }: CarouselPageProps) {
     let ratingLabel = getRatingLabel(rating);
 
     return (
@@ -40,7 +40,7 @@ export default function CarouselPage({ id, name, url_image, synopsis, mean, rank
                 <div className="new_genre">
                     {genres.map((genre) => (
                         <span key={genre} className="new_genre_item">
-                            <a className="me-1">{genre.trim()}</a>
+                            <span className="me-1">{genre.trim()}</span>
                         </span>
                     ))}
                 </div>

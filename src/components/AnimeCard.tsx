@@ -21,7 +21,7 @@ interface AnimeCardProps {
     media_type: string;
 }
 
-export default function AnimeCard({ id, name, url_image, synopsis, mean, rank, popularity, genres, num_episodes, rating, pictures, background, average_episode_duration, start_date, num_list_users, media_type, }: AnimeCardProps) {
+export default function AnimeCard({ id, name, url_image, synopsis, mean, genres, num_episodes, rating, num_list_users, }: AnimeCardProps) {
 
     let ratingLabel = getRatingLabel(rating);
 

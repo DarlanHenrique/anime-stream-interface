@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../css/App.css";
-import Navbar from "../../components/Navbar";
-import Home from "./Home";
-import AnimeDetailsPage from "../anime/AnimeDetailsPage";
-import EpisodeWatchingPage from "../anime/EpisodeWatchingPage";
-import Footer from "../../components/Footer";
-import SearchResults from "../../components/SearchResults";
+import "./css/App.css";
+import Navbar from "./components/Navbar";
+import Home from "./site/index/Home";
+import AnimeDetailsPage from "./site/anime/AnimeDetailsPage";
+import EpisodeWatchingPage from "./site/anime/EpisodeWatchingPage";
+import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const currentDate = new Date();
