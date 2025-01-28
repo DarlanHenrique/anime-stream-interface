@@ -39,7 +39,7 @@ jobs:
         run: npm ci
       - name: Build
         env:
-          VITE_MAL_CLIENT_ID: ${{ secrets.REACT_APP_API_KEY }}
+          VITE_MAL_CLIENT_ID: ${{ secrets.VITE_MAL_CLIENT_ID }}
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
