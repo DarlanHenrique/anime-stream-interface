@@ -1,5 +1,6 @@
 const BASE_URL = '/api/v2/anime';
 const CLIENT_ID = import.meta.env.VITE_MAL_CLIENT_ID;
+console.log(CLIENT_ID);
 
 export interface Anime {
   id: number;
