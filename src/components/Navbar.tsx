@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import "../css/Navbar.css";
 import logo from '../assets/logo/Net_Prime_Plus_Max_Flix.png';
 import { Link } from 'react-router-dom';
