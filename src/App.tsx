@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
@@ -8,21 +8,19 @@ import AnimeDetailsPage from "./site/anime/AnimeDetailsPage";
 import EpisodeWatchingPage from "./site/anime/EpisodeWatchingPage";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
-
+import { appReducer, initialState } from "./state/appReducer";
 function App() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
-  const [isSearchActive, setIsSearchActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  const { isSearchActive, searchQuery } = state;
 
   const resetToInitialState = () => {
-    setIsSearchActive(false);
-    setSearchQuery("");
+    dispatch({ type: "RESET_SEARCH" });
   };
 
   const handleSearch = (query: string) => {
-    setIsSearchActive(true);
-    setSearchQuery(query);
+     dispatch({ type: "SET_SEARCH_QUERY", payload: query });
   };
 
   return (
