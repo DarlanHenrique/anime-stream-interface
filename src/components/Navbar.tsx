@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import "../css/Navbar.css";
 import logo from '../assets/logo/Net_Prime_Plus_Max_Flix.png';
 import { Link } from 'react-router-dom';
@@ -9,8 +10,8 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
+  const searchRef = useRef<HTMLInputElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [showSearchModal, setShowSearchModal] = useState(false);
 
   useEffect(() => {
@@ -23,13 +24,13 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSearch = () => {
-    if (searchQuery.trim() !== '') {
-      onSearch(searchQuery);
-      setSearchQuery('');
-      setShowSearchModal(false);
+  const handleSearch = useCallback(() => {
+    const query = searchRef.current?.value.trim();
+    if (query) {
+      onSearch(query);
+      if (searchRef.current) searchRef.current.value = '';
     }
-  };
+  }, [onSearch]);
 
   return (
     <>
@@ -84,14 +85,9 @@ export default function Navbar({ onHomeClick, onSearch }: NavbarProps) {
             <input
               className="search-input"
               type="text"
-              placeholder="Search your favoirite anime..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
+              placeholder="Search your favourite anime..."
+              ref={searchRef}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               autoFocus
             />
             <button className="search-btn" onClick={handleSearch}>

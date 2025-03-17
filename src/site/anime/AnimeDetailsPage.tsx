@@ -138,7 +138,7 @@ export default function AnimeDetailsPage() {
                     <h2>Episodes</h2>
                     <div className="episodes-grid">
                         {Array.from({ length: anime.num_episodes || 0 }).map((_, index) => (
-                            <Link to={`/anime/${id}/${anime.name}/${index + 1}`} key={`${anime.name}_${index+1}`} className="episode-card">
+                            <Link to={`/anime/${id}/${anime.name}/${index + 1}`} key={`${anime.name}_${index + 1}`} className="episode-card">
                                 <div className="episode-image-wrapper">
                                     <img
                                         src={anime.pictures?.[0] || anime.url_image}
